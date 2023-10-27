@@ -1,18 +1,14 @@
 {
-  "name": "worker-example",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "parcel": "^2.10.1",
-    "typescript": "^5.2.2"
-  },
+  "name": "service-worker-example",
+  "packageManager": "yarn@4.0.0",
   "source": "src/index.html",
   "scripts": {
-    "start": "parcel",
+    "start": "parcel serve",
     "build": "parcel build"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "2.10.1"
+    "@parcel/core": "^2.10.1",
+    "parcel": "^2.10.1",
+    "typescript": "^5.2.2"
   }
 }
