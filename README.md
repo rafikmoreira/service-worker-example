@@ -1,30 +1,30 @@
-# Service Worker: Exemplo Simples
+# Service Worker: Simple Example
 
-O Service Worker é um script que roda em segundo plano no seu navegador, operando de forma independente de uma página web. Ele abre portas para funcionalidades que não exigem interação do usuário ou uma página web ativa. Atualmente, ele suporta recursos como notificações push e sincronização em segundo plano.
+The Service Worker is a script that runs in the background of your browser, operating independently of a web page. It enables features that don't require user interaction or an active web page. Currently, it supports functionalities like push notifications and background sync.
 
-## Como Utilizar Este Exemplo
+## How to Use This Example
 
-Para começar, siga as instruções abaixo:
+To get started, follow the instructions below:
 
-### Instalação de Dependências
+### Installing Dependencies
 
-Antes de tudo, instale as dependências do projeto. Execute o comando abaixo no terminal para garantir que todas as funcionalidades do Service Worker sejam suportadas:
+First and foremost, install the project dependencies. Run the following command in the terminal to ensure that all Service Worker features are supported:
 
 `yarn install`
 
-### Compilação do Projeto
+### Project Compilation
 
-Após a instalação das dependências, construa o projeto usando o comando:
+After installing the dependencies, build the project using the command:
 
 `yarn start`
 
-Esse comando prepara o ambiente para que o Service Worker funcione corretamente.
+This command sets up the environment for the Service Worker to function correctly.
 
-Ao seguir essas etapas simples, você poderá testar o exemplo. Lembre-se de que o Service Worker opera em segundo plano, oferecendo uma experiência de usuário mais eficiente e dinâmica, sem a necessidade de interação constante.
+By following these simple steps, you can test the example. Remember that the Service Worker operates in the background, providing a more efficient and dynamic user experience without the need for constant interaction.
 
-Notas Importantes:
+#### Important Notes
 
-Certifique-se de ter o Node.js e o yarn instalados em seu sistema antes de começar.
-Este é um exemplo básico. Personalize conforme suas necessidades e integre-o em seu projeto conforme desejado.
-Sinta-se à vontade para contribuir, reportar problemas ou fazer melhorias neste exemplo.
-Espero que seja útil para você em seu desenvolvimento web!
+Make sure you have Node.js and yarn installed on your system before you begin.
+This is a basic example. Customize it according to your needs and integrate it into your project as desired.
+Feel free to contribute, report issues, or make improvements to this example.
+We hope this proves helpful in your web development journey!
