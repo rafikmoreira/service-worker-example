@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Worker test</title>
+  </head>
+  <body class="bg-gray-100 text-2xl">
+    <main>
+      <div class="container mx-auto mt-8">
+        <h1 class="uppercase text-5xl">Service Worker - Contador</h1>
+        <p class="my-5 text-4xl">
+          Número: <span id="number" class="text-green-500">0</span>
+        </p>
+        <div id="controls">
+          <button class="bg-red-500 py-2 px-5 uppercase" id="start">
+            iniciar
+          </button>
+          <button class="bg-red-500 py-2 px-5 uppercase" id="pause">
+            pausar
+          </button>
+          <button class="bg-red-500 py-2 px-5 uppercase" id="resume">
+            continuar
+          </button>
+          <button class="bg-red-500 py-2 px-5 uppercase" id="stop">
+            parar
+          </button>
+          <button class="bg-red-500 py-2 px-5 uppercase" id="reset">
+            reiniciar
+          </button>
+          <button class="bg-red-500 py-2 px-5 uppercase" id="block-thread">
+            bloquear thread principal
+          </button>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="app.ts"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </body>
+</html>

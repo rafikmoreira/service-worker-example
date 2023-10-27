@@ -1,0 +1,18 @@
+{
+  "name": "worker-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "parcel": "^2.10.1",
+    "typescript": "^5.2.2"
+  },
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.10.1"
+  }
+}
