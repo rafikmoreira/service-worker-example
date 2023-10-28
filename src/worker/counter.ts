@@ -28,44 +28,44 @@ export class Counter {
     return this._isCounting;
   }
 
-  start() {
+  start(event: MessageEvent) {
     if (!this.isCounting) {
       this._interval = setInterval(() => {
         this.showCounterValue();
         this._counter++;
-        self.postMessage(this._counter);
+        event.ports[0].postMessage(this._counter);
       }, 1000);
       this._isCounting = true;
     }
   }
 
-  stop() {
+  stop(event: MessageEvent) {
     if (this.isCounting) {
       clearInterval(this._interval);
       this._counter = 0;
       this._isCounting = false;
     }
-    self.postMessage(this._counter);
+    event.ports[0].postMessage(this._counter);
   }
 
   resetCounter() {
     this._counter = 0;
   }
 
-  pause() {
+  pause(event: MessageEvent) {
     if (this.isCounting) {
       clearInterval(this._interval);
       this._isCounting = false;
     }
-    self.postMessage(this._counter);
+    event.ports[0].postMessage(this._counter);
   }
 
-  resume() {
+  resume(event: MessageEvent) {
     if (!this.isCounting) {
       this._interval = setInterval(() => {
         this.showCounterValue();
         this._counter++;
-        self.postMessage(this._counter);
+        event.ports[0].postMessage(this._counter);
       }, 1000);
       this._isCounting = true;
     }

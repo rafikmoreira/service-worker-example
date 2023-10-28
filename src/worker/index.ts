@@ -27,19 +27,20 @@ self.addEventListener("message", (event) => {
 
   switch (message.type) {
     case Messages["START"]:
-      counter.start();
+      console.log("Starting countdown...");
+      counter.start(event);
       break;
 
     case Messages["STOP"]:
-      counter.stop();
+      counter.stop(event);
       break;
 
     case Messages["PAUSE"]:
-      counter.pause();
+      counter.pause(event);
       break;
 
     case Messages["RESUME"]:
-      counter.resume();
+      counter.resume(event);
       break;
 
     case Messages["RESTART"]:
