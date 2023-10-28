@@ -1,27 +1,15 @@
 import { Message, Messages } from "./worker/index";
 
 export class Countdown {
-  private _numberText: HTMLSpanElement;
-  private _workerUrl: URL;
-  private _startButton: HTMLButtonElement;
-  private _stopButton: HTMLButtonElement;
-  private _pauseButton: HTMLButtonElement;
-  private _resumeButton: HTMLButtonElement;
-  private _resetButton: HTMLButtonElement;
-  private _blockThreadButton: HTMLButtonElement;
+  private numberText: HTMLSpanElement;
+  private worker: Worker;
 
   constructor() {
-    this._startButton = document.querySelector("#start") as HTMLButtonElement;
-    this._stopButton = document.querySelector("#stop") as HTMLButtonElement;
-    this._pauseButton = document.querySelector("#pause") as HTMLButtonElement;
-    this._resumeButton = document.querySelector("#resume") as HTMLButtonElement;
-    this._resetButton = document.querySelector("#reset") as HTMLButtonElement;
-    this._blockThreadButton = document.querySelector(
-      "#block-thread"
-    ) as HTMLButtonElement;
-
-    this._workerUrl = new URL("./worker/counter.ts", import.meta.url);
-    this._numberText = document.querySelector("#number") as HTMLSpanElement;
+    this.numberText = document.querySelector("#number") as HTMLSpanElement;
+    this.worker = new Worker(new URL("./worker/index.ts", import.meta.url), {
+      type: "module",
+      name: "CountdownWorker",
+    });
     this.registerServiceWorker();
     this.addEventListeners();
   }
@@ -29,14 +17,12 @@ export class Countdown {
   private registerServiceWorker() {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register(this._workerUrl, {
+        .register(new URL("./worker/index.ts", import.meta.url), {
           type: "module",
         })
         .then((registration) => {
-          const worker = new Worker(this._workerUrl);
-
-          worker.onmessage = (event) => {
-            this._numberText.textContent = event.data;
+          this.worker.onmessage = (event) => {
+            this.numberText.textContent = event.data;
           };
         })
         .catch((error) => {
@@ -46,37 +32,46 @@ export class Countdown {
   }
 
   private addEventListeners() {
-    this._startButton.addEventListener("click", () => {
-      self.postMessage({
+    const startButton = document.querySelector("#start") as HTMLButtonElement;
+    const stopButton = document.querySelector("#stop") as HTMLButtonElement;
+    const pauseButton = document.querySelector("#pause") as HTMLButtonElement;
+    const resumeButton = document.querySelector("#resume") as HTMLButtonElement;
+    const resetButton = document.querySelector("#reset") as HTMLButtonElement;
+    const blockThreadButton = document.querySelector(
+      "#block-thread"
+    ) as HTMLButtonElement;
+
+    startButton.addEventListener("click", () => {
+      this.worker.postMessage({
         type: Messages["START"],
       } as Message);
     });
 
-    this._stopButton.addEventListener("click", () => {
-      self.postMessage({
+    stopButton.addEventListener("click", () => {
+      this.worker.postMessage({
         type: Messages["STOP"],
       } as Message);
     });
 
-    this._pauseButton.addEventListener("click", () => {
-      self.postMessage({
+    pauseButton.addEventListener("click", () => {
+      this.worker.postMessage({
         type: Messages["PAUSE"],
       } as Message);
     });
 
-    this._resumeButton.addEventListener("click", () => {
-      self.postMessage({
+    resumeButton.addEventListener("click", () => {
+      this.worker.postMessage({
         type: Messages["RESUME"],
       } as Message);
     });
 
-    this._resetButton.addEventListener("click", () => {
-      self.postMessage({
+    resetButton.addEventListener("click", () => {
+      this.worker.postMessage({
         type: Messages["RESTART"],
       } as Message);
     });
 
-    this._blockThreadButton.addEventListener("click", () => {
+    blockThreadButton.addEventListener("click", () => {
       alert("Thread bloqueada, vamos parar o processo do contador? 🤔");
     });
   }
