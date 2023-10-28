@@ -1,6 +1,6 @@
-let counter = 0;
-let isCounting = false;
-let interval: number | undefined = undefined;
+import { Counter } from "./counter";
+
+const counter = new Counter();
 
 export type Message = {
   type: Messages;
@@ -27,56 +27,23 @@ self.addEventListener("message", (event) => {
 
   switch (message.type) {
     case Messages["START"]:
-      if (!isCounting) {
-        interval = setInterval(() => {
-          console.log(`Valor do contador ${counter}, agora é ${counter + 1}`);
-          counter++;
-          self.postMessage(counter);
-        }, 1000);
-
-        isCounting = true;
-      }
+      counter.start();
       break;
 
     case Messages["STOP"]:
-      if (isCounting) {
-        clearInterval(interval);
-        counter = 0;
-        isCounting = false;
-      }
-      self.postMessage(counter);
+      counter.stop();
       break;
 
     case Messages["PAUSE"]:
-      if (isCounting) {
-        clearInterval(interval);
-        isCounting = false;
-      }
-      self.postMessage(counter);
+      counter.pause();
       break;
 
     case Messages["RESUME"]:
-      if (!isCounting) {
-        interval = setInterval(() => {
-          console.log(`Valor do contador ${counter}, agora é ${counter + 1}`);
-          counter++;
-          self.postMessage(counter);
-        }, 1000);
-        isCounting = true;
-      }
+      counter.resume();
       break;
 
     case Messages["RESTART"]:
-      if (isCounting) {
-        clearInterval(interval);
-        counter = 0;
-        interval = setInterval(() => {
-          console.log(`Valor do contador ${counter}, agora é ${counter + 1}`);
-          counter++;
-          self.postMessage(counter);
-        }, 1000);
-        isCounting = true;
-      }
+      counter.resetCounter();
       break;
   }
 });
